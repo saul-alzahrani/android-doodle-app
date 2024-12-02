@@ -28,7 +28,7 @@ This repository contains an Android-based doodling application that allows users
 
 1. #### Clone the Repository:
 
-git clone https://github.com/saul-alzahrani/mydoodle.git
+git clone https://github.com/saul-alzahrani/android-doodle-app.git
 
 2. #### Open in Android Studio:
 
