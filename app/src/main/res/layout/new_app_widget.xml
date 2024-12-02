@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:background="#1E90FF">
+
+    <!-- Text View to display widget title -->
+    <TextView
+        android:id="@+id/appwidget_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Drawing App Widget"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="16sp" />
+
+    <!-- Button to launch the drawing app -->
+    <Button
+        android:id="@+id/appwidget_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open App"
+        android:layout_below="@id/appwidget_text"
+        android:layout_marginTop="8dp"
+        android:textColor="#1E90FF"
+        android:background="#FFFFFF"
+        android:padding="8dp" />
+
+</RelativeLayout>
