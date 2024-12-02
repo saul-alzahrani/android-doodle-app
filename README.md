@@ -1,7 +1,7 @@
 # android-doodle-app
 This repository contains an Android-based doodling application that allows users to draw on a canvas with customizable brush settings such as brush size, color, and opacity. The tool panel for customization is located at the bottom of the screen for easy access.
 
-![Alt text](images/mydoodle.png)
+![Alt text](image/mydoodle.png)
 
 ## Features: 
 * Full-screen doodling canvas.
