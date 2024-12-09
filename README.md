@@ -1,20 +1,25 @@
 # android-doodle-app
-This repository contains an Android-based doodling application that allows users to draw on a canvas with customizable brush settings such as brush size, color, and opacity. The tool panel for customization is located at the bottom of the screen for easy access.
+This repository contains an Android-based doodling application that allows users to draw on a canvas with customizable brush settings such as brush size, color, and opacity. The tool panel for customization is located at the bottom of the screen for easy access. Additionally, users can add images from the device's studio and save the image after tracing on it.
 
 
-<img src="image/mydoodle.png" alt="My Doodle" width="250"/>
+<img src="image/mydoodle2.png" alt="My Doodle" width="250"/>
 
 
 ## Features: 
-* Full-screen doodling canvas.
-
-* Tool panel with buttons for brush size, color selection, opacity adjustment, and clearing the canvas.
-
-* Adjustable brush size using a seek bar in a dialog.
-
+### Tool panel with buttons for:
 * Color selection (currently supports a simple predefined color selection).
 
+* Add image from device's studio
+  
+* Clear the current canvas
+
+* Save image after tracing on ot
+
+* Adjustable brush size using a seekbar in a dialog.
+
 * Adjustable opacity for brush strokes.
+
+* Adjustable brightness using a seekbar in a dialog
 
 ## How to Run the Application
 
@@ -65,4 +70,6 @@ git clone https://github.com/saul-alzahrani/android-doodle-app.git
 5. https://medium.com/@mihirrshah02/make-a-drawing-app-in-android-6a36edf21bc9
 6. https://youtu.be/5BzYH6Vq6ZU?si=d3WcOkO4bw2640P5
 7. https://www.youtube.com/watch?v=AM6lJnze9nA
+8. https://youtu.be/bLi1qr6h4T4?si=KrKsVEAT88ouqxjQ
+9. https://youtu.be/bLi1qr6h4T4?si=hYCA-bfwYkoGwy8M
    
