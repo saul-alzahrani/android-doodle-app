@@ -4,10 +4,8 @@ package com.example.mydoodle;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,11 +19,6 @@ public class DrawingView extends View {
     private Path currentPath;
     private List<ColoredPath> paths;
 
-    // Clear area-related variables
-    private boolean isClearingArea = false;
-    private float startX, startY, endX, endY;
-
-    // Custom class to store a path along with its paint (color, size, opacity)
     private class ColoredPath {
         Path path;
         Paint paint;
@@ -43,14 +36,12 @@ public class DrawingView extends View {
 
     private void init() {
         paths = new ArrayList<>();
-
         currentPaint = new Paint();
-        currentPaint.setColor(Color.BLACK);
+        currentPaint.setColor(0xFF000000); // Default black color
         currentPaint.setAntiAlias(true);
         currentPaint.setStrokeWidth(10);
         currentPaint.setStyle(Paint.Style.STROKE);
         currentPaint.setStrokeJoin(Paint.Join.ROUND);
-        currentPaint.setAlpha(255); // Default opacity
         currentPath = new Path();
     }
 
@@ -58,38 +49,17 @@ public class DrawingView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        // Set the background color
-        canvas.drawColor(Color.WHITE);
-
-        // Draw all previous paths
         for (ColoredPath coloredPath : paths) {
             canvas.drawPath(coloredPath.path, coloredPath.paint);
         }
 
-        // Draw current path
-        if (currentPath != null) {
-            canvas.drawPath(currentPath, currentPaint);
-        }
-
-        // Draw the selection rectangle if in clearing mode
-        if (isClearingArea) {
-            Paint clearRectPaint = new Paint();
-            clearRectPaint.setStyle(Paint.Style.STROKE);
-            clearRectPaint.setColor(Color.RED);
-            clearRectPaint.setStrokeWidth(5);
-            canvas.drawRect(startX, startY, endX, endY, clearRectPaint);
-        }
+        canvas.drawPath(currentPath, currentPaint);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         float x = event.getX();
         float y = event.getY();
-
-        if (isClearingArea) {
-            handleClearAreaTouchEvent(event);
-            return true;
-        }
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -99,8 +69,8 @@ public class DrawingView extends View {
                 currentPath.lineTo(x, y);
                 break;
             case MotionEvent.ACTION_UP:
-                paths.add(new ColoredPath(currentPath, new Paint(currentPaint)));
-                currentPath = new Path();
+                paths.add(new ColoredPath(new Path(currentPath), new Paint(currentPaint)));
+                currentPath.reset();
                 break;
             default:
                 return false;
@@ -125,49 +95,6 @@ public class DrawingView extends View {
     public void clearCanvas() {
         paths.clear();
         currentPath.reset();
-        invalidate();
-    }
-
-    public void startClearingArea() {
-        isClearingArea = true;
-    }
-
-    private void handleClearAreaTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                startX = event.getX();
-                startY = event.getY();
-                endX = startX;
-                endY = startY;
-                break;
-            case MotionEvent.ACTION_MOVE:
-                endX = event.getX();
-                endY = event.getY();
-                break;
-            case MotionEvent.ACTION_UP:
-                clearSpecificArea();
-                isClearingArea = false;
-                break;
-        }
-
-        invalidate();
-    }
-
-    private void clearSpecificArea() {
-        RectF rect = new RectF(Math.min(startX, endX), Math.min(startY, endY), Math.max(startX, endX), Math.max(startY, endY));
-        List<ColoredPath> remainingPaths = new ArrayList<>();
-
-        for (ColoredPath coloredPath : paths) {
-            Path path = coloredPath.path;
-            RectF bounds = new RectF();
-            path.computeBounds(bounds, true);
-
-            if (!RectF.intersects(bounds, rect)) {
-                remainingPaths.add(coloredPath);
-            }
-        }
-
-        paths = remainingPaths;
         invalidate();
     }
 }
